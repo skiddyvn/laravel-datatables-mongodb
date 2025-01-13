@@ -2,7 +2,7 @@
 
 namespace Pimlie\DataTables;
 
-use Jenssegers\Mongodb\Helpers\EloquentBuilder;
+use MongoDB\Laravel\Helpers\EloquentBuilder;
 use Yajra\DataTables\EloquentDataTable;
 
 class HybridMongodbQueryDataTable extends EloquentDataTable

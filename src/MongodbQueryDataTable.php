@@ -2,8 +2,8 @@
 
 namespace Pimlie\DataTables;
 
-use Jenssegers\Mongodb\Eloquent\Builder as MoloquentBuilder;
-use Jenssegers\Mongodb\Query\Builder;
+use MongoDB\Laravel\Eloquent\Builder as MoloquentBuilder;
+use MongoDB\Laravel\Query\Builder;
 use Illuminate\Support\Str;
 use Yajra\DataTables\QueryDataTable;
 use Yajra\DataTables\Utilities\Helper;

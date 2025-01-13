@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+    laravel-datatables-mongodb-composer:
+        build: .
+        container_name: laravel_datatables_mongodb_composer
+        command: composer install
+        user: "${UID}:${GID}"
+        volumes:
+            - .:/data/laravel-datatables-mongodb

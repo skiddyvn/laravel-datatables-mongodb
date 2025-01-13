@@ -2,8 +2,8 @@
 
 namespace Pimlie\DataTables;
 
-use Jenssegers\Mongodb\Eloquent\Model;
-use Jenssegers\Mongodb\Eloquent\Builder;
+use MongoDB\Laravel\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Builder;
 
 class MongodbDataTable extends MongodbQueryDataTable
 {
