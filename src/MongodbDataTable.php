@@ -18,7 +18,7 @@ class MongodbDataTable extends MongodbQueryDataTable
      * @param mixed $source
      * @return boolean
      */
-    public static function canCreate($source)
+    public static function canCreate($source): bool
     {
         return $source instanceof Model || $source instanceof Builder ||
             strpos(get_class($source), 'Jenssegers\Mongodb\Relations') !== false;
