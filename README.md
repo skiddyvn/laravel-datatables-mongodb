@@ -1,14 +1,10 @@
 # Laravel DataTables Mongodb Plugin
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/pimlie/laravel-datatables-mongodb.svg)](https://packagist.org/packages/pimlie/laravel-datatables-mongodb)
-[![Total Downloads](https://img.shields.io/packagist/dt/pimlie/laravel-datatables-mongodb.svg)](https://packagist.org/packages/pimlie/laravel-datatables-mongodb)
-[![License](https://img.shields.io/github/license/pimlie/laravel-datatables-mongodb.svg)](https://packagist.org/packages/pimlie/laravel-datatables-mongodb)
+Forked from pimlie/laravel-datatables-mongodb
 
-This package is a plugin for [Laravel DataTables](https://github.com/yajra/laravel-datatables) to support Mongodb using [Laravel Mongodb](https://github.com/jenssegers/laravel-mongodb/)
+For: jenssegers/laravel-mongodb + yajra/laravel-datatables-oracle ~9.x: Use `pimlie/laravel-datatables-mongodb`(https://github.com/pimlie/laravel-datatables-mongodb)
 
-## Requirements
-- [Laravel DataTables >=8.3](https://github.com/yajra/laravel-datatables)
-- [Laravel Mongodb](https://github.com/jenssegers/laravel-mongodb)
+Support mongodb/laravel-mongodb^5.x + yajra/laravel-datatables-oracle ^12.x
 
 ## Documentation
 - [Laravel DataTables Documentation](http://yajrabox.com/docs/laravel-datatables)
@@ -16,24 +12,24 @@ This package is a plugin for [Laravel DataTables](https://github.com/yajra/larav
 This plugin provides most functionalities described in the Laravel Datatables documentation. See `Known issues` below
 
 ## Installation
-`composer require pimlie/laravel-datatables-mongodb:^1.1`
+1. Add to composer.json:
+{
+    [...],
+    "require": {
+        [...],
+        "pimlie/laravel-datatables-mongodb": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/skiddyvn/laravel-datatables-mongodb"
+        }
+    ]
+}
+2. Run composer update
 
 ## Configure
-
-Check the Laravel DataTables configuration for how to configure and use it.
-
-If you want the `datables()` and/or `of` methods to automatically use the correct datatables engine,
-
-Unfortunately we cant use auto-discovery yet, this package will be discoverd before laravel-datatables is and that will overwrite the engines config at the moment
-
-~~> Although this package has a dependency on laravel-datatables, you need to explictly require the package as auto-discovery works based on the packages listed in the dependencies section of your composer.json.~~
-
-```
-composer require yajra/laravel-datatables-oracle:"~8.0"
-composer require pimlie/laravel-datatables-mongodb:^1.1
-```
-
-so you __either__ you have to add the service provide:
+Add the service provide:
 
 ```
 'providers' => [
