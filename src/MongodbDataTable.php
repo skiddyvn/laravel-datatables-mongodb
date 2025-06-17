@@ -5,7 +5,7 @@ namespace Pimlie\DataTables;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Eloquent\Builder;
 
-class MongodbDataTable extends TestQueryDataTable
+class MongodbDataTable extends MongodbQueryDataTable
 {
     protected $query;
 
