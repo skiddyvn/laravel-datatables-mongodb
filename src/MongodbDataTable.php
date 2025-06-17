@@ -5,11 +5,8 @@ namespace Pimlie\DataTables;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Eloquent\Builder;
 
-class MongodbDataTable extends MongodbQueryDataTable
+class MongodbDataTable extends TestQueryDataTable
 {
-    /**
-     * @var \Jenssegers\Mongodb\Eloquent\Builder
-     */
     protected $query;
 
     /**
@@ -21,7 +18,7 @@ class MongodbDataTable extends MongodbQueryDataTable
     public static function canCreate($source): bool
     {
         return $source instanceof Model || $source instanceof Builder ||
-            strpos(get_class($source), 'Jenssegers\Mongodb\Relations') !== false;
+            strpos(get_class($source), 'MongoDB\Laravel\Relations') !== false;
     }
 
     /**
@@ -29,7 +26,7 @@ class MongodbDataTable extends MongodbQueryDataTable
      *
      * @param mixed $model
      */
-    public function __construct($model)
+    public function __construct(protected $model)
     {
         $builder = $model instanceof Model || $model instanceof Builder ? $model : $model->getQuery();
         parent::__construct($builder->getQuery());
@@ -54,7 +51,7 @@ class MongodbDataTable extends MongodbQueryDataTable
      *
      * @return string
      */
-    protected function getPrimaryKeyName()
+    protected function getPrimaryKeyName(): string
     {
         return $this->query->getModel()->getKeyName();
     }

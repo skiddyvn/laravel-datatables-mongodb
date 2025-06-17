@@ -1,13 +1,21 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.2-cli
 
-WORKDIR /data/laravel-activitylog-mongodb
-
-RUN apk add --no-cache --update --virtual buildDeps autoconf git g++ make
-RUN apk add --no-cache --update curl-dev openssl-dev zip libzip-dev gd libpng libpng-dev libxml2-dev libpq-dev
+# Install system deps
+RUN apt-get update && apt-get install -y \
+    git unzip zip libzip-dev libssl-dev libcurl4-openssl-dev libonig-dev libxml2-dev \
+    libicu-dev libpq-dev gnupg curl libpng-dev libjpeg-dev libfreetype6-dev \
+    && docker-php-ext-install pdo pdo_mysql zip
 RUN pecl install mongodb && docker-php-ext-enable mongodb
-RUN docker-php-ext-install opcache bcmath sockets zip gd xml
-RUN pecl config-set php_ini /etc/php.ini \
-	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-	&& apk del buildDeps \
-	&& rm -rf /var/cache/apk/* \
-	&& apk del libpng-dev
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Set working directory
+WORKDIR /app
+
+# Copy everything
+COPY . .
+
+# Install PHP deps
+RUN composer install
+
+# RUN git config --global --add safe.directory /app

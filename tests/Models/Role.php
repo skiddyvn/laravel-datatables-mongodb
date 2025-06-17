@@ -2,7 +2,7 @@
 
 namespace Pimlie\DataTables\Tests\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use MongoDB\Laravel\Eloquent\Model as Eloquent;
 use Pimlie\DataTables\Traits\MongodbDataTableTrait;
 
 class Role extends Eloquent

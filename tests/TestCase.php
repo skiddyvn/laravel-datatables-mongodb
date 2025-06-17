@@ -68,7 +68,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Jenssegers\Mongodb\MongodbServiceProvider::class,
+            \MongoDB\Laravel\MongoDBServiceProvider::class,
             \Yajra\DataTables\DataTablesServiceProvider::class,
         ];
     }

@@ -4,7 +4,7 @@ return [
         'mongodb' => [
             'name'       => 'mongodb',
             'driver'     => 'mongodb',
-            'host'       => '127.0.0.1',
+            'host'       => 'mongo',
             'database'   => 'unittest',
         ],
         'mysql' => [
