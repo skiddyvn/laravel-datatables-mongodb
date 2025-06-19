@@ -587,12 +587,13 @@ class MongodbQueryDataTable extends DataTableAbstract
             })
             ->reject(fn ($orderable) => $this->isBlacklisted($orderable['name']) && ! $this->hasOrderColumn($orderable['name']))
             ->each(function ($orderable) {
-                if ($this->hasOrderColumn($orderable['name'])) {
-                    $this->applyOrderColumn($orderable);
+                $column = $this->resolveRelationColumn($orderable['name']);
+
+                // if ($this->hasOrderColumn($orderable['name'])) {
+                if ($this->hasOrderColumn($column)) {
+                    $this->applyOrderColumn($column, $orderable);
                 } else {
-                    $column = $this->resolveRelationColumn($orderable['name']);
-                    $normalSql = $this->wrap($column).' '.$orderable['direction'];
-                    $this->query->orderByRaw($normalSql);
+                    $this->query->orderBy($column, $orderable['direction']);
                 }
             });
     }
@@ -608,20 +609,9 @@ class MongodbQueryDataTable extends DataTableAbstract
     /**
      * Apply orderColumn custom query.
      */
-    protected function applyOrderColumn(array $orderable): void
+    protected function applyOrderColumn($column, array $orderable): void
     {
-        $sql = $this->columnDef['order'][$orderable['name']]['sql'];
-        if ($sql === false) {
-            return;
-        }
-
-        if (is_callable($sql)) {
-            call_user_func($sql, $this->query, $orderable['direction'], fn ($column) => $this->resolveRelationColumn($column));
-        } else {
-            $sql = str_replace('$1', $orderable['direction'], (string) $sql);
-            $bindings = $this->columnDef['order'][$orderable['name']]['bindings'];
-            $this->query->orderByRaw($sql, $bindings);
-        }
+        $this->query->orderBy($column, $orderable['direction']);
     }
 
     /**
